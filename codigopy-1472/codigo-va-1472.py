@@ -106,3 +106,5 @@ print("Presiona una tecla con las ventanas seleccionadas para finalizar.")
 
 cv2.waitKey(0)
 cv2.destroyAllWindows()
+
+print("programa realizado por jose solis nc 1472")
