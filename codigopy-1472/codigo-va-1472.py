@@ -1,5 +1,7 @@
 # jose solis NC = 1472
 
+# jose solis NC = 1472
+
 import cv2
 from pathlib import Path
 
@@ -10,11 +12,11 @@ try:
 except NameError:
     carpeta_proyecto = Path.cwd()
 
-# Se actualizó el nombre de la imagen a 'img-camello-1472.jpg'
+# Se actualizó el nombre de la imagen a 'img-camello-1472.png'
 ruta_original = (
     carpeta_proyecto
     / "img-original-1472"
-    / "img-camello-1472.jpg"
+    / "img-camello-1472.png"
 )
 
 carpeta_resultados = (
@@ -31,7 +33,7 @@ img1472 = cv2.imread(str(ruta_original))
 if img1472 is None:
     raise FileNotFoundError(
         f"No se pudo leer la imagen en la ruta: {ruta_original}\n"
-        f"Verifica la ubicación del archivo 'img-camello-1472.jpg'."
+        f"Verifica la ubicación del archivo 'img-camello-1472.png'."
     )
 
 # 3. Rotar la imagen 90 grados en sentido horario
@@ -72,31 +74,41 @@ cv2.rectangle(
     3
 )
 
-# 7. Mostrar las cinco imágenes con sus títulos
-cv2.imshow("Camello Original 1472", img1472)
-cv2.imshow("Camello Rotado 90deg 1472", img90_1472)
-cv2.imshow("Camello Rotado 45deg 1472", img45_1472)
-cv2.imshow("Camello 600x500 1472", img600x500_1472)
-cv2.imshow("Camello con Rectangulo 1472", img_camello_1472)
+# 7. Mostrar las cinco imágenes con ventanas redimensionables
+titulos = [
+    ("Camello Original 1472", img1472),
+    ("Camello Rotado 90deg 1472", img90_1472),
+    ("Camello Rotado 45deg 1472", img45_1472),
+    ("Camello 600x500 1472", img600x500_1472),
+    ("Camello con Rectangulo 1472", img_camello_1472)
+]
+
+# Definir el tamaño deseado para la ventana en pantalla (ancho, alto)
+ancho_win, alto_win = 400, 300
+
+for titulo, img in titulos:
+    cv2.namedWindow(titulo, cv2.WINDOW_NORMAL)
+    cv2.resizeWindow(titulo, ancho_win, alto_win)
+    cv2.imshow(titulo, img)
 
 # 8. Guardar las cuatro imágenes procesadas
 cv2.imwrite(
-    str(carpeta_resultados / "img-camello1-1472.jpg"),
+    str(carpeta_resultados / "img-camello1-1472.png"),
     img90_1472
 )
 
 cv2.imwrite(
-    str(carpeta_resultados / "img-camello2-1472.jpg"),
+    str(carpeta_resultados / "img-camello2-1472.png"),
     img45_1472
 )
 
 cv2.imwrite(
-    str(carpeta_resultados / "img-camello3-1472.jpg"),
+    str(carpeta_resultados / "img-camello3-1472.png"),
     img600x500_1472
 )
 
 cv2.imwrite(
-    str(carpeta_resultados / "img-camello4-1472.jpg"),
+    str(carpeta_resultados / "img-camello4-1472.png"),
     img_camello_1472
 )
 
